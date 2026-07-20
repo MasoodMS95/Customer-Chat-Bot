@@ -13,7 +13,9 @@ function ChatWindow() {
     const chatbotRef = useRef(new ChatbotDriver());
     const nextMessageIdRef = useRef(2);
     const inputRef = useRef(null);
-
+    const [input, setInput] = useState("");
+    const [isResponding, setIsResponding] = useState(false);
+    const [isClosed, setIsClosed] = useState(false);
     const [messages, setMessages] = useState([
         {
             id: 1,
@@ -21,12 +23,6 @@ function ChatWindow() {
             text: INITIAL_BOT_MESSAGE,
         },
     ]);
-
-    const [input, setInput] = useState("");
-    const [isResponding, setIsResponding] =
-        useState(false);
-    const [isClosed, setIsClosed] =
-        useState(false);
 
     useEffect(() => {
         if (!isResponding && !isClosed) {
