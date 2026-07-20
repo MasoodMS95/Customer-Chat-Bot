@@ -103,14 +103,14 @@ app.post("/api/orders", (req, res) => {
             )
         ) {
             return res.status(409).json({
-                message: "That order number already exists.",
+                error: "That order number already exists.",
             });
         }
 
         console.error(error);
 
         return res.status(500).json({
-            message: "Unable to create the order.",
+            error: "Unable to create the order.",
         });
     }
 });
@@ -135,7 +135,7 @@ app.get("/api/orders/:number", (req, res) => {
 
         if (!order) {
             return res.status(404).json({
-                message: "No order was found with that number.",
+                error: "No order was found with that number.",
             });
         }
 
@@ -144,7 +144,7 @@ app.get("/api/orders/:number", (req, res) => {
         console.error(error);
 
         return res.status(500).json({
-            message: "Unable to retrieve the order.",
+            error: "Unable to retrieve the order.",
         });
     }
 });
@@ -152,7 +152,7 @@ app.get("/api/orders/:number", (req, res) => {
 //Catch all for all non defined routes.
 app.use((req, res) => {
     return res.status(404).json({
-        message: "Route not found.",
+        error: "Route not found.",
     });
 });
 
