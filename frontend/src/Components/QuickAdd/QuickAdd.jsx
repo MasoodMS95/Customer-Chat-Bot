@@ -32,7 +32,7 @@ function QuickAdd(){
         e.preventDefault();
 
         setError("");
-        setResult(null);
+        setLastSubmittedData(null);
         if(orderNum.trim() === "" && status === ""){
             setError("Please set the order # and status.")
             return;
