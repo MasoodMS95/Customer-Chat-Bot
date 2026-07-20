@@ -13,6 +13,7 @@ function ChatWindow() {
     const chatbotRef = useRef(new ChatbotDriver());
     const nextMessageIdRef = useRef(2);
     const inputRef = useRef(null);
+    const scrollRef = useRef(null);
     const [input, setInput] = useState("");
     const [isResponding, setIsResponding] = useState(false);
     const [isClosed, setIsClosed] = useState(false);
@@ -41,6 +42,12 @@ function ChatWindow() {
 
         return message;
     }
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({
+            behavior: "smooth",
+        });
+    }, [messages])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -106,8 +113,10 @@ function ChatWindow() {
 
     return (
         <div className="chat-window">
-            <Messages messages={messages} />
-
+            <Messages
+                messages={messages}
+                scrollRef={scrollRef}
+            />
             <form
                 className="response-window"
                 onSubmit={handleSubmit}

@@ -1,4 +1,4 @@
-function Messages({ messages }) {
+function Messages({ messages, scrollRef }) {
     return (
         <div className="messages">
             {messages.map((message) => (
@@ -11,6 +11,7 @@ function Messages({ messages }) {
                     </div>
                 </div>
             ))}
+            <div ref={scrollRef}/>
         </div>
     );
 }
