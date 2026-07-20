@@ -15,7 +15,7 @@ function QuickAdd(){
                 <option value={"Order Received"}>Order Received</option>
                 <option value={"Shipping"}>Shipping</option>
                 <option value={"Shipped"}>Shipped</option>
-                <option value={"Out for delivery"}>Out for delivery</option>
+                <option value={"Out for Delivery"}>Out for Delivery</option>
                 <option value={"Delivered"}>Delivered</option>
             </select>
             <button type="Submit">Submit</button>
