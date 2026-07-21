@@ -634,9 +634,27 @@ class ChatbotDriver {
         status response.
         */
         this.state = CHAT_STATE.REPORT_STATUS;
-
-        const statusMessage =
-            `The package is currently ${order.status}.`;
+        console.log(order);
+        let statusMessage;
+        switch(order.status){
+            case "Order Received":
+                statusMessage = `We have received your order and are processing it now.`;
+                break;
+            case "Shipping":
+                statusMessage = `We are shipping your product soon. You will be contacted by email with the tracking number when it has shipped.`;
+                break;
+            case "Shipped":
+                statusMessage = `We have shipped your product. The tracking number is ${order.trackingNumber}, please go to our shipping partner with this tracking number to get real-time updates.`;
+                break;
+            case "Out for Delivery":
+                statusMessage = `Your order is currently out for delivery. It should arrive soon. The tracking number is ${order.trackingNumber}, please go to our shipping partner with this tracking number to get real-time updates.`;
+                break;
+            case "Delivered":
+                statusMessage = `Your order has been delivered.`
+                break;
+            default:
+                statusMessage = `The package is currently ${order.status}.`;
+        }
 
         /*
         State 3 -> State 5
