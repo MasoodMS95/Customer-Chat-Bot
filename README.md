@@ -9,7 +9,7 @@ A full-stack package tracking application built with:
 
 The application allows orders to be created and looked up using either an order number or tracking number. It also includes a chatbot that guides users through package tracking and delivery-status questions.
 
-![State Diagram](ChatbotConversationFlow.drawio.png)
+![State Diagram](./Screenshots/ChatbotConversationFlow.drawio.png)
 
 ---
 
@@ -29,7 +29,7 @@ The React frontend communicates with an Express REST API, which retrieves packag
 
 When the application loads, the chatbot greets the user and begins the conversation.
 
-![Initial Greeting](InitialGreeting.png)
+![Initial Greeting](./Screenshots/InitialGreeting.png)
 
 ---
 
@@ -37,7 +37,7 @@ When the application loads, the chatbot greets the user and begins the conversat
 
 The chatbot accepts either an order number or tracking number, retrieves the matching package from the database, and reports the current shipping status.
 
-![Found Package](FoundPackage.png)
+![Found Package](./Screenshots/FoundPackage.png)
 
 ---
 
@@ -45,7 +45,7 @@ The chatbot accepts either an order number or tracking number, retrieves the mat
 
 If an unexpected response is entered, the chatbot validates the input, prompts the user again, and keeps the conversation on a valid path.
 
-![Invalid Input](InvalidInput.png)
+![Invalid Input](./Screenshots/InvalidInput.png)
 
 ---
 
@@ -53,7 +53,7 @@ If an unexpected response is entered, the chatbot validates the input, prompts t
 
 When a delivered package is located, the chatbot confirms delivery and asks whether the user needs assistance with another package.
 
-![Delivered Package](DeliveredPackage.png)
+![Delivered Package](./Screenshots/DeliveredPackage.png)
 
 ---
 
@@ -61,7 +61,7 @@ When a delivered package is located, the chatbot confirms delivery and asks whet
 
 If the provided order or tracking number cannot be found, the chatbot informs the user and allows another lookup attempt.
 
-![Package Not Found](PackageNotFound.png)
+![Package Not Found](./Screenshots/PackageNotFound.png)
 
 ---
 
