@@ -639,7 +639,6 @@ class ChatbotDriver {
         status response.
         */
         this.state = CHAT_STATE.REPORT_STATUS;
-        console.log(order);
         let statusMessage;
         switch (order.status) {
             case "Order Received":

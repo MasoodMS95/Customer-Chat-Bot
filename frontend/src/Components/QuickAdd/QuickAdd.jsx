@@ -55,7 +55,6 @@ function QuickAdd(){
             })
 
             const parsedData = await responseData.json();
-            console.log(parsedData)
             if(!responseData.ok){
                 setError(parsedData.error || "Something went wrong");
                 return;
