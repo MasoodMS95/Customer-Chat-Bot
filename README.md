@@ -13,6 +13,58 @@ The application allows orders to be created and looked up using either an order 
 
 ---
 
+# Project Approach
+
+The application was designed as a lightweight full-stack package tracking system that demonstrates both RESTful backend development and conversational user interaction.
+
+Rather than relying on a large language model, the chatbot uses a **finite state machine (FSM)** to guide users through predefined conversation paths. Each conversation state validates user input before transitioning to the next state, ensuring predictable behavior while preventing invalid conversation flows.
+
+The React frontend communicates with an Express REST API, which retrieves package information from a SQLite database. This separation of responsibilities keeps the frontend focused on the user interface while the backend manages business logic and data storage.
+
+---
+
+# Chatbot Examples
+
+## Initial Greeting
+
+When the application loads, the chatbot greets the user and begins the conversation.
+
+![Initial Greeting](InitialGreeting.png)
+
+---
+
+## Successful Package Lookup
+
+The chatbot accepts either an order number or tracking number, retrieves the matching package from the database, and reports the current shipping status.
+
+![Found Package](FoundPackage.png)
+
+---
+
+## Invalid Input Handling
+
+If an unexpected response is entered, the chatbot validates the input, prompts the user again, and keeps the conversation on a valid path.
+
+![Invalid Input](InvalidInput.png)
+
+---
+
+## Delivered Package
+
+When a delivered package is located, the chatbot confirms delivery and asks whether the user needs assistance with another package.
+
+![Delivered Package](DeliveredPackage.png)
+
+---
+
+## Package Not Found
+
+If the provided order or tracking number cannot be found, the chatbot informs the user and allows another lookup attempt.
+
+![Package Not Found](PackageNotFound.png)
+
+---
+
 # Project Structure
 
 ```text
