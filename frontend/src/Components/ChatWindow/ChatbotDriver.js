@@ -506,38 +506,43 @@ class ChatbotDriver {
     */
     async handleTrackingInput(message) {
         /*
-        Only contact the backend when the identifier passes the local
-        format validation.
+        State 1 and State 4 only perform a backend lookup when the
+        input passes identifier validation.
+    
+        Invalid formats also count as failed lookup attempts so the
+        chatbot cannot remain in this state indefinitely.
         */
         if (!this.isValidIdentifier(message)) {
+            this.lookupFailures += 1;
+
+            // After three invalid tracking/order number attempts,
+            // direct the user to support and move to State 8.
+            if (this.lookupFailures >= 3) {
+                return this.moveToSupport();
+            }
+
             /*
-            When the previous backend lookup failed, continue displaying
-            the more specific lookup-failure message.
+            If a previous database lookup returned 404, keep using the
+            lookup-failed message.
             */
-            if (
-                this.state === CHAT_STATE.LOOKUP_FAILED
-            ) {
+            if (this.state === CHAT_STATE.LOOKUP_FAILED) {
                 return [
                     STATE_MESSAGES[
-                        CHAT_STATE.LOOKUP_FAILED
+                    CHAT_STATE.LOOKUP_FAILED
                     ],
                 ];
             }
 
-            /*
-            Otherwise remain in ASK_TRACKING and repeat the standard
-            tracking-number prompt.
-            */
+            // Otherwise remain in State 1 and ask for the number again.
             this.state = CHAT_STATE.ASK_TRACKING;
 
             return [
-                STATE_MESSAGES[CHAT_STATE.ASK_TRACKING],
+                STATE_MESSAGES[
+                CHAT_STATE.ASK_TRACKING
+                ],
             ];
         }
 
-        /*
-        The identifier passed local validation, so send it to the backend.
-        */
         return this.performLookup(message);
     }
 
@@ -592,7 +597,7 @@ class ChatbotDriver {
 
                 return [
                     STATE_MESSAGES[
-                        CHAT_STATE.LOOKUP_FAILED
+                    CHAT_STATE.LOOKUP_FAILED
                     ],
                 ];
             }
@@ -636,7 +641,7 @@ class ChatbotDriver {
         this.state = CHAT_STATE.REPORT_STATUS;
         console.log(order);
         let statusMessage;
-        switch(order.status){
+        switch (order.status) {
             case "Order Received":
                 statusMessage = `We have received your order and are processing it now.`;
                 break;
@@ -669,7 +674,7 @@ class ChatbotDriver {
             return [
                 statusMessage,
                 STATE_MESSAGES[
-                    CHAT_STATE.DELIVERED_CONFIRM
+                CHAT_STATE.DELIVERED_CONFIRM
                 ],
             ];
         }
@@ -685,7 +690,7 @@ class ChatbotDriver {
         return [
             statusMessage,
             STATE_MESSAGES[
-                CHAT_STATE.ANOTHER_PACKAGE
+            CHAT_STATE.ANOTHER_PACKAGE
             ],
         ];
     }
@@ -710,7 +715,7 @@ class ChatbotDriver {
 
             return [
                 STATE_MESSAGES[
-                    CHAT_STATE.ANOTHER_PACKAGE
+                CHAT_STATE.ANOTHER_PACKAGE
                 ],
             ];
         }
@@ -730,7 +735,7 @@ class ChatbotDriver {
 
             const adviceMessage =
                 STATE_MESSAGES[
-                    CHAT_STATE.LOST_PACKAGE_ADVICE
+                CHAT_STATE.LOST_PACKAGE_ADVICE
                 ];
 
             /*
@@ -742,7 +747,7 @@ class ChatbotDriver {
             return [
                 adviceMessage,
                 STATE_MESSAGES[
-                    CHAT_STATE.ANOTHER_PACKAGE
+                CHAT_STATE.ANOTHER_PACKAGE
                 ],
             ];
         }
@@ -771,7 +776,7 @@ class ChatbotDriver {
 
         return [
             STATE_MESSAGES[
-                CHAT_STATE.DELIVERED_CONFIRM
+            CHAT_STATE.DELIVERED_CONFIRM
             ],
         ];
     }
@@ -846,7 +851,7 @@ class ChatbotDriver {
 
         return [
             STATE_MESSAGES[
-                CHAT_STATE.ANOTHER_PACKAGE
+            CHAT_STATE.ANOTHER_PACKAGE
             ],
         ];
     }
@@ -869,7 +874,7 @@ class ChatbotDriver {
 
         const supportMessage =
             STATE_MESSAGES[
-                CHAT_STATE.CONTACT_SUPPORT
+            CHAT_STATE.CONTACT_SUPPORT
             ];
 
         // State 6 automatically transitions to State 8.
@@ -878,7 +883,7 @@ class ChatbotDriver {
         return [
             supportMessage,
             STATE_MESSAGES[
-                CHAT_STATE.ANOTHER_PACKAGE
+            CHAT_STATE.ANOTHER_PACKAGE
             ],
         ];
     }
