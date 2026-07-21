@@ -7,7 +7,7 @@ import {
 import Messages from "./Messages";
 import ChatbotDriver, {
     INITIAL_BOT_MESSAGE,
-} from "./ChatbotDriver.js";
+} from "../ChatBot/ChatbotDriver.js";
 
 function ChatWindow() {
     // Create a single ChatbotDriver instance that persists for the
