@@ -9,6 +9,8 @@ A full-stack package tracking application built with:
 
 The application allows orders to be created and looked up using either an order number or tracking number. It also includes a chatbot that guides users through package tracking and delivery-status questions.
 
+![State Diagram](ChatbotConversationFlow.drawio.png)
+
 ---
 
 # Project Structure
